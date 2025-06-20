@@ -1,3 +1,4 @@
+using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Firestore;
 using TodoApi.Models;
 
@@ -7,6 +8,8 @@ namespace TodoApi.Services{
         private readonly FirestoreDb _db;
 
         public FirebaseService(IConfiguration configuration){
+            var credentialPath = Environment.GetEnvironmentVariable("FIREBASE_ADMIN_SDK");
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", credentialPath);
             _db = FirestoreDb.Create("todo-f7383");
         }
 
